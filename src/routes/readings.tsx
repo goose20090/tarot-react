@@ -1,12 +1,29 @@
-import { Link, createFileRoute } from '@tanstack/react-router'
+import {
+  Link,
+  Outlet,
+  createFileRoute,
+  useRouterState,
+} from '@tanstack/react-router'
 import { CardThumb } from '#/components/CardThumb'
 import { PageHeader } from '#/components/PageHeader'
 import { getReadings } from '#/lib/tarot.functions'
 
 export const Route = createFileRoute('/readings')({
   loader: () => getReadings(),
-  component: ReadingsPage,
+  component: ReadingsRouteComponent,
 })
+
+function ReadingsRouteComponent() {
+  const isIndex = useRouterState({
+    select: (state) => state.location.pathname === '/readings',
+  })
+
+  if (!isIndex) {
+    return <Outlet />
+  }
+
+  return <ReadingsPage />
+}
 
 function ReadingsPage() {
   const { readings } = Route.useLoaderData()

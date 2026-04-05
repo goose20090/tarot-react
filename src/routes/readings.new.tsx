@@ -1,4 +1,4 @@
-import { Link, createFileRoute, notFound } from '@tanstack/react-router'
+import { createFileRoute, notFound } from '@tanstack/react-router'
 import { EntityCard } from '#/components/EntityCard'
 import { PageHeader } from '#/components/PageHeader'
 import { ReadingBuilder } from '#/components/ReadingBuilder'

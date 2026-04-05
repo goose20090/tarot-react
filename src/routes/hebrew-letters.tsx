@@ -1,12 +1,24 @@
-import { createFileRoute } from '@tanstack/react-router'
+import { Outlet, createFileRoute, useRouterState } from '@tanstack/react-router'
 import { EntityCard } from '#/components/EntityCard'
 import { PageHeader } from '#/components/PageHeader'
 import { getHebrewLetters } from '#/lib/tarot.functions'
 
 export const Route = createFileRoute('/hebrew-letters')({
   loader: () => getHebrewLetters(),
-  component: HebrewLettersIndexPage,
+  component: HebrewLettersRouteComponent,
 })
+
+function HebrewLettersRouteComponent() {
+  const isIndex = useRouterState({
+    select: (state) => state.location.pathname === '/hebrew-letters',
+  })
+
+  if (!isIndex) {
+    return <Outlet />
+  }
+
+  return <HebrewLettersIndexPage />
+}
 
 function HebrewLettersIndexPage() {
   const { letters } = Route.useLoaderData()

@@ -1,4 +1,4 @@
-import { cpSync, existsSync, mkdirSync, readFileSync, rmSync } from 'node:fs'
+import { existsSync, mkdirSync, readFileSync, rmSync } from 'node:fs'
 import { dirname, resolve } from 'node:path'
 import Database from 'better-sqlite3'
 import { drizzle } from 'drizzle-orm/better-sqlite3'
@@ -30,9 +30,8 @@ import {
 } from '../src/db/schema'
 
 const appRoot = resolve(import.meta.dirname, '..')
-const legacyRoot = resolve(appRoot, '..', 'tarot')
 const databasePath = resolve(appRoot, 'data/tarot.sqlite')
-const publicRoot = resolve(appRoot, 'public/tarot-assets')
+const cardsCsvPath = resolve(appRoot, 'data/cards.csv')
 const force = process.argv.includes('--force')
 
 function ensureDir(path: string) {
@@ -221,25 +220,6 @@ function createTables(sqlite: Database.Database) {
   `)
 }
 
-function syncAssets() {
-  ensureDir(publicRoot)
-  cpSync(resolve(legacyRoot, 'db/data/images/full'), resolve(publicRoot, 'card-images'), {
-    recursive: true,
-    force: true,
-  })
-  cpSync(
-    resolve(legacyRoot, 'db/data/images/small'),
-    resolve(publicRoot, 'card-images-small'),
-    {
-      recursive: true,
-      force: true,
-    },
-  )
-  cpSync(resolve(legacyRoot, 'public/icon.svg'), resolve(publicRoot, 'icon.svg'), {
-    force: true,
-  })
-}
-
 async function main() {
   if (force && existsSync(databasePath)) {
     rmSync(databasePath)
@@ -324,7 +304,11 @@ async function main() {
   const pathRows = await db.query.paths.findMany()
   const pathMap = new Map(pathRows.map((row) => [row.number, row.id]))
 
-  const csvRows = parseCsv(readFileSync(resolve(legacyRoot, 'db/data/cards.csv'), 'utf8'))
+  if (!existsSync(cardsCsvPath)) {
+    throw new Error(`Missing local seed file: ${cardsCsvPath}`)
+  }
+
+  const csvRows = parseCsv(readFileSync(cardsCsvPath, 'utf8'))
   await db
     .insert(cards)
     .values(
@@ -378,8 +362,6 @@ async function main() {
         .onConflictDoNothing()
     }
   }
-
-  syncAssets()
 
   const counts = {
     cards: (sqlite.prepare('SELECT COUNT(*) AS count FROM cards').get() as { count: number }).count,

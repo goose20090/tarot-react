@@ -1,12 +1,24 @@
-import { createFileRoute } from '@tanstack/react-router'
+import { Outlet, createFileRoute, useRouterState } from '@tanstack/react-router'
 import { EntityCard } from '#/components/EntityCard'
 import { PageHeader } from '#/components/PageHeader'
 import { getSephiroth } from '#/lib/tarot.functions'
 
 export const Route = createFileRoute('/sephiroth')({
   loader: () => getSephiroth(),
-  component: SephirothIndexPage,
+  component: SephirothRouteComponent,
 })
+
+function SephirothRouteComponent() {
+  const isIndex = useRouterState({
+    select: (state) => state.location.pathname === '/sephiroth',
+  })
+
+  if (!isIndex) {
+    return <Outlet />
+  }
+
+  return <SephirothIndexPage />
+}
 
 function SephirothIndexPage() {
   const { sephiroth } = Route.useLoaderData()

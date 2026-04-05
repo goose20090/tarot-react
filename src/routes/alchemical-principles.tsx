@@ -1,4 +1,4 @@
-import { createFileRoute } from '@tanstack/react-router'
+import { Outlet, createFileRoute, useRouterState } from '@tanstack/react-router'
 import { CardThumb } from '#/components/CardThumb'
 import { EntityCard } from '#/components/EntityCard'
 import { PageHeader } from '#/components/PageHeader'
@@ -6,8 +6,20 @@ import { getAlchemy } from '#/lib/tarot.functions'
 
 export const Route = createFileRoute('/alchemical-principles')({
   loader: () => getAlchemy(),
-  component: AlchemyIndexPage,
+  component: AlchemyRouteComponent,
 })
+
+function AlchemyRouteComponent() {
+  const isIndex = useRouterState({
+    select: (state) => state.location.pathname === '/alchemical-principles',
+  })
+
+  if (!isIndex) {
+    return <Outlet />
+  }
+
+  return <AlchemyIndexPage />
+}
 
 function AlchemyIndexPage() {
   const { principles, weddingCards } = Route.useLoaderData()

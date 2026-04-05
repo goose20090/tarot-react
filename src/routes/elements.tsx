@@ -1,12 +1,24 @@
-import { createFileRoute } from '@tanstack/react-router'
+import { Outlet, createFileRoute, useRouterState } from '@tanstack/react-router'
 import { EntityCard } from '#/components/EntityCard'
 import { PageHeader } from '#/components/PageHeader'
 import { getElements } from '#/lib/tarot.functions'
 
 export const Route = createFileRoute('/elements')({
   loader: () => getElements(),
-  component: ElementsIndexPage,
+  component: ElementsRouteComponent,
 })
+
+function ElementsRouteComponent() {
+  const isIndex = useRouterState({
+    select: (state) => state.location.pathname === '/elements',
+  })
+
+  if (!isIndex) {
+    return <Outlet />
+  }
+
+  return <ElementsIndexPage />
+}
 
 function ElementsIndexPage() {
   const { elements } = Route.useLoaderData()

@@ -1,12 +1,24 @@
-import { createFileRoute } from '@tanstack/react-router'
+import { Outlet, createFileRoute, useRouterState } from '@tanstack/react-router'
 import { EntityCard } from '#/components/EntityCard'
 import { PageHeader } from '#/components/PageHeader'
 import { getZodiacSigns } from '#/lib/tarot.functions'
 
 export const Route = createFileRoute('/zodiac-signs')({
   loader: () => getZodiacSigns(),
-  component: ZodiacIndexPage,
+  component: ZodiacRouteComponent,
 })
+
+function ZodiacRouteComponent() {
+  const isIndex = useRouterState({
+    select: (state) => state.location.pathname === '/zodiac-signs',
+  })
+
+  if (!isIndex) {
+    return <Outlet />
+  }
+
+  return <ZodiacIndexPage />
+}
 
 function ZodiacIndexPage() {
   const { zodiacSigns } = Route.useLoaderData()

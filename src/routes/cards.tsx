@@ -1,5 +1,10 @@
 import * as Tabs from '@radix-ui/react-tabs'
-import { createFileRoute, useNavigate } from '@tanstack/react-router'
+import {
+  Outlet,
+  createFileRoute,
+  useNavigate,
+  useRouterState,
+} from '@tanstack/react-router'
 import { CardThumb } from '#/components/CardThumb'
 import { PageHeader } from '#/components/PageHeader'
 import { getCards } from '#/lib/tarot.functions'
@@ -21,7 +26,7 @@ export const Route = createFileRoute('/cards')({
         : undefined,
   }),
   loader: ({ search }) => getCards({ data: search }),
-  component: CardsPage,
+  component: CardsRouteComponent,
 })
 
 const tabSearch: Record<string, CardsSearch> = {
@@ -33,12 +38,35 @@ const tabSearch: Record<string, CardsSearch> = {
   disks: { arcana: 'minor', suit: 'disks' },
 }
 
+function CardsRouteComponent() {
+  const isIndex = useRouterState({
+    select: (state) => state.location.pathname === '/cards',
+  })
+
+  if (!isIndex) {
+    return <Outlet />
+  }
+
+  return <CardsPage />
+}
+
 function CardsPage() {
   const navigate = useNavigate()
   const search = Route.useSearch()
   const data = Route.useLoaderData()
 
   const activeTab = search.suit ?? (search.arcana === 'major' ? 'major' : 'all')
+  const filteredCards = data.cards.filter((card) => {
+    if (search.arcana && card.arcana !== search.arcana) {
+      return false
+    }
+
+    if (search.suit && card.suit !== search.suit) {
+      return false
+    }
+
+    return true
+  })
 
   return (
     <div className="space-y-6">
@@ -80,7 +108,7 @@ function CardsPage() {
       </section>
 
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-        {data.cards.map((card, index) => (
+        {filteredCards.map((card, index) => (
           <div key={card.id} className="rise-in" style={{ animationDelay: `${index * 24}ms` }}>
             <CardThumb card={card} />
           </div>
