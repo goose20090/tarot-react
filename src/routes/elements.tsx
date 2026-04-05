@@ -1,0 +1,37 @@
+import { createFileRoute } from '@tanstack/react-router'
+import { EntityCard } from '#/components/EntityCard'
+import { PageHeader } from '#/components/PageHeader'
+import { getElements } from '#/lib/tarot.functions'
+
+export const Route = createFileRoute('/elements')({
+  loader: () => getElements(),
+  component: ElementsIndexPage,
+})
+
+function ElementsIndexPage() {
+  const { elements } = Route.useLoaderData()
+
+  return (
+    <div className="space-y-8">
+      <PageHeader
+        eyebrow="Reference"
+        title="Elements"
+        subtitle="The four classical elements and their direct tarot correspondences."
+      />
+
+      <div className="grid gap-4 lg:grid-cols-2">
+        {elements.map((element) => (
+          <EntityCard
+            key={element.id}
+            to="/elements/$elementId"
+            params={{ elementId: String(element.id) }}
+            icon={<span>{element.symbol}</span>}
+            title={element.name}
+            subtitle={element.zodiacSigns.join(', ')}
+            meta={`${element.cardCount} cards`}
+          />
+        ))}
+      </div>
+    </div>
+  )
+}
