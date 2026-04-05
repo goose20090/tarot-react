@@ -25,7 +25,7 @@ export const Route = createFileRoute('/cards')({
         ? search.suit
         : undefined,
   }),
-  loader: ({ search }) => getCards({ data: search }),
+  loader: () => getCards({ data: {} }),
   component: CardsRouteComponent,
 })
 
@@ -107,11 +107,9 @@ function CardsPage() {
         </Tabs.Root>
       </section>
 
-      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-        {filteredCards.map((card, index) => (
-          <div key={card.id} className="rise-in" style={{ animationDelay: `${index * 24}ms` }}>
-            <CardThumb card={card} />
-          </div>
+      <div className="grid gap-2 grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 xl:grid-cols-7">
+        {filteredCards.map((card) => (
+          <CardThumb key={card.id} card={card} />
         ))}
       </div>
     </div>

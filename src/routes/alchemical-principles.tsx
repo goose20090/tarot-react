@@ -48,7 +48,7 @@ function AlchemyIndexPage() {
 
       <section className="space-y-4">
         <h2 className="display-font m-0 text-4xl text-[var(--text)]">The Alchemical Wedding</h2>
-        <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+        <div className="grid gap-3 grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
           {weddingCards.map((card) => (
             <CardThumb key={card.id} card={card} />
           ))}

@@ -149,7 +149,7 @@ export function ReadingBuilder({
             <button
               type="button"
               onClick={drawAll}
-              className="focus-ring inline-flex items-center gap-2 rounded-full border border-[var(--line)] px-4 py-2 text-sm text-[var(--text-soft)] transition hover:border-[var(--line-strong)] hover:text-[var(--text)]"
+              className="focus-ring inline-flex items-center gap-2 rounded-full border border-[var(--line)] px-4 py-2 text-sm text-[var(--text-soft)] transition hover:border-[var(--accent)] hover:text-[var(--text)]"
             >
               <Shuffle className="h-4 w-4" />
               Draw All
@@ -241,7 +241,7 @@ export function ReadingBuilder({
                       <button
                         type="button"
                         onClick={() => drawRandom(position.id)}
-                        className="focus-ring inline-flex items-center gap-2 rounded-full border border-[var(--line)] px-3 py-2 text-sm text-[var(--text-soft)] transition hover:border-[var(--line-strong)] hover:text-[var(--text)]"
+                        className="focus-ring inline-flex items-center gap-2 rounded-full border border-[var(--line)] px-3 py-2 text-sm text-[var(--text-soft)] transition hover:border-[var(--accent)] hover:text-[var(--text)]"
                       >
                         <Shuffle className="h-4 w-4" />
                         Draw
@@ -249,7 +249,7 @@ export function ReadingBuilder({
                       <button
                         type="button"
                         onClick={() => setActiveSlotId(position.id)}
-                        className="focus-ring inline-flex items-center gap-2 rounded-full border border-[var(--line)] px-3 py-2 text-sm text-[var(--text-soft)] transition hover:border-[var(--line-strong)] hover:text-[var(--text)]"
+                        className="focus-ring inline-flex items-center gap-2 rounded-full border border-[var(--line)] px-3 py-2 text-sm text-[var(--text-soft)] transition hover:border-[var(--accent)] hover:text-[var(--text)]"
                       >
                         Pick
                       </button>
@@ -277,7 +277,7 @@ export function ReadingBuilder({
             </button>
             <Link
               to="/readings"
-              className="focus-ring rounded-full border border-[var(--line)] px-4 py-3 text-sm text-[var(--text-soft)] transition hover:border-[var(--line-strong)] hover:text-[var(--text)]"
+              className="focus-ring rounded-full border border-[var(--line)] px-4 py-3 text-sm text-[var(--text-soft)] transition hover:border-[var(--accent)] hover:text-[var(--text)]"
             >
               Cancel
             </Link>

@@ -30,7 +30,7 @@ export function PageHeader({
         ) : null}
         {eyebrow ? <p className="kicker m-0">{eyebrow}</p> : null}
         <div className="space-y-2">
-          <h1 className="display-font m-0 text-5xl leading-none tracking-tight text-[var(--text)]">
+          <h1 className="display-font m-0 text-4xl leading-none tracking-tight text-[var(--accent-strong)]">
             {title}
           </h1>
           {subtitle ? (

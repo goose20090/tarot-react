@@ -15,28 +15,28 @@ export function CardThumb({ card, caption }: CardThumbProps) {
     <Link
       to="/cards/$cardId"
       params={{ cardId: String(card.id) }}
-      className="group focus-ring surface-panel-strong block rounded-[1.75rem] p-3 transition hover:-translate-y-1 hover:border-[var(--line-strong)]"
+      className="focus-ring surface-panel-strong block rounded-2xl p-2 transition hover:-translate-y-1 hover:border-[var(--accent)] hover:shadow-[0_8px_24px_rgba(201,168,76,0.2)]"
     >
-      <div className="overflow-hidden rounded-[1.2rem] border border-[var(--line)] bg-[linear-gradient(180deg,rgba(255,255,255,0.04),rgba(255,255,255,0.01))]">
+      <div className="overflow-hidden rounded-xl border border-[var(--line)] bg-[var(--panel-muted)]">
         {card.thumbUrl ? (
           <img
             src={card.thumbUrl}
             alt={card.name}
             loading="lazy"
-            className="aspect-[0.72] w-full object-cover transition duration-300 group-hover:scale-[1.03]"
+            className="aspect-[9/15] w-full object-cover object-top"
           />
         ) : (
-          <div className="display-font flex aspect-[0.72] items-center justify-center bg-[var(--panel-muted)] p-6 text-center text-2xl text-[var(--text-soft)]">
+          <div className="display-font flex aspect-[0.72] items-center justify-center p-4 text-center text-base text-[var(--text-soft)]">
             {card.name}
           </div>
         )}
       </div>
-      <div className="pt-3">
-        <p className="m-0 text-sm text-[var(--text-muted)]">{card.badge}</p>
-        <h3 className="display-font m-0 pt-1 text-2xl leading-tight text-[var(--text)]">
+      <div className="px-1 pt-2 pb-1">
+        <p className="m-0 text-[0.65rem] uppercase tracking-wide text-[var(--text-muted)]">{card.badge}</p>
+        <h3 className="display-font m-0 pt-0.5 text-base leading-tight text-[var(--text)]">
           {card.name}
         </h3>
-        {caption ? <div className="pt-2 text-sm text-[var(--text-soft)]">{caption}</div> : null}
+        {caption ? <div className="pt-1 text-xs text-[var(--text-soft)]">{caption}</div> : null}
       </div>
     </Link>
   )

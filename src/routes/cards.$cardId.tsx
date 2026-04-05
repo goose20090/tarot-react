@@ -209,16 +209,16 @@ function CardDetailPage() {
     <div className="space-y-8">
       <PageHeader backHref="/cards" backLabel="Cards" title={card.name} subtitle={card.typeLabel} />
 
-      <div className="grid gap-6 lg:grid-cols-[minmax(0,0.72fr)_minmax(0,1fr)]">
-        <section className="surface-panel-strong rounded-[2rem] p-4 md:p-6">
+      <div className="grid gap-10 lg:grid-cols-[260px_minmax(0,1fr)] lg:items-start">
+        <div className="shadow-[0_4px_32px_rgba(0,0,0,0.5)]">
           <CardLightbox imageUrl={card.imageUrl} cardName={card.name} />
-        </section>
+        </div>
 
-        <section className="surface-panel-strong ornate-border rounded-[2rem] p-5 md:p-7">
+        <div className="space-y-8">
           <MetaTable items={metaItems} />
 
           {card.alchemicalWedding ? (
-            <div className="mt-8 rounded-[1.7rem] border border-[var(--line)] bg-[var(--panel-muted)] p-5">
+            <div className="rounded-2xl border border-[var(--line)] bg-[var(--panel-muted)] p-5">
               <p className="kicker m-0">Alchemical Wedding</p>
               <h2 className="display-font m-0 pt-2 text-3xl text-[var(--text)]">
                 {titleize(card.alchemicalWedding)}
@@ -230,7 +230,7 @@ function CardDetailPage() {
               </p>
             </div>
           ) : null}
-        </section>
+        </div>
       </div>
     </div>
   )

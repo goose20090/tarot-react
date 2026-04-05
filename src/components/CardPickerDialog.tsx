@@ -101,7 +101,7 @@ export function CardPickerDialog({
                       onOpenChange(false)
                     }}
                     className={cn(
-                      'focus-ring surface-panel flex flex-col gap-3 rounded-[1.5rem] p-3 text-left transition hover:-translate-y-1 hover:border-[var(--line-strong)] disabled:cursor-not-allowed disabled:opacity-35',
+                      'focus-ring surface-panel flex flex-col gap-3 rounded-[1.5rem] p-3 text-left transition hover:-translate-y-1 hover:border-[var(--accent)] hover:shadow-[0_8px_24px_rgba(201,168,76,0.2)] disabled:cursor-not-allowed disabled:opacity-35',
                       unavailable ? '' : 'hover:text-[var(--text)]',
                     )}
                   >
@@ -110,7 +110,7 @@ export function CardPickerDialog({
                         <img
                           src={card.thumbUrl}
                           alt={card.name}
-                          className="aspect-[0.72] w-full object-cover"
+                          className="aspect-[9/15] w-full object-cover object-top"
                         />
                       ) : (
                         <div className="display-font flex aspect-[0.72] items-center justify-center bg-[var(--panel-muted)] p-4 text-center text-xl text-[var(--text-soft)]">
