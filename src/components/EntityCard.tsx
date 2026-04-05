@@ -27,7 +27,7 @@ export function EntityCard({
       className="surface-panel-strong focus-ring block rounded-2xl p-4 transition hover:border-[var(--accent)] hover:bg-[var(--panel-muted)]"
     >
       <div className="grid grid-cols-[auto_minmax(0,1fr)] gap-3">
-        <div className="display-font flex h-11 w-11 items-center justify-center rounded-lg border border-[var(--line)] bg-[var(--panel-muted)] text-xl text-[var(--accent-strong)]">
+        <div className="display-font flex w-10 items-center justify-start text-2xl text-[var(--accent-strong)]">
           {icon}
         </div>
         <div className="min-w-0">

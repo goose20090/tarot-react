@@ -46,7 +46,6 @@ function RootComponent() {
         <main className="app-shell pb-16 pt-8 md:pt-10">
           <Outlet />
         </main>
-        <Footer />
         <TanStackDevtools
           config={{ position: 'bottom-right' }}
           plugins={[

@@ -31,7 +31,7 @@ function ZodiacIndexPage() {
         subtitle="Astrological correspondences of the Thoth Tarot."
       />
 
-      <div className="grid gap-4 lg:grid-cols-2">
+      <div className="flex flex-col gap-3">
         {zodiacSigns.map((sign) => (
           <EntityCard
             key={sign.id}

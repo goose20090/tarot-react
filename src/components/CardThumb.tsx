@@ -28,9 +28,9 @@ export function CardThumb({ card, caption }: CardThumbProps) {
       params={{ cardId: String(card.id) }}
       preload="intent"
       onMouseEnter={prefetchImage}
-      className="focus-ring surface-panel-strong block rounded-2xl p-2 transition hover:-translate-y-1 hover:border-[var(--accent)] hover:shadow-[0_8px_24px_rgba(201,168,76,0.2)]"
+      className="focus-ring surface-panel-strong block overflow-hidden rounded-2xl transition hover:-translate-y-1 hover:border-[var(--accent)] hover:shadow-[0_8px_24px_rgba(201,168,76,0.2)]"
     >
-      <div className="overflow-hidden rounded-xl border border-[var(--line)] bg-[var(--panel-muted)]">
+      <div className="bg-[var(--panel-muted)]">
         {card.thumbUrl ? (
           <img
             src={card.thumbUrl}
@@ -44,9 +44,9 @@ export function CardThumb({ card, caption }: CardThumbProps) {
           </div>
         )}
       </div>
-      <div className="px-1 pt-2 pb-1">
-        <p className="m-0 text-[0.65rem] uppercase tracking-wide text-[var(--text-muted)]">{card.badge}</p>
-        <h3 className="display-font m-0 pt-0.5 text-base leading-tight text-[var(--text)]">
+      <div className="px-3 pt-2.5 pb-3">
+        <p className="m-0 text-xs uppercase tracking-wide text-[var(--text-muted)]">{card.badge}</p>
+        <h3 className="display-font m-0 pt-0.5 text-sm leading-tight text-[var(--text)]">
           {card.name}
         </h3>
         {caption ? <div className="pt-1 text-xs text-[var(--text-soft)]">{caption}</div> : null}

@@ -31,7 +31,7 @@ function PathsIndexPage() {
         subtitle="The twenty-two paths of the Tree of Life, each carried by a Major Arcana and a Hebrew letter."
       />
 
-      <div className="grid gap-4 lg:grid-cols-2">
+      <div className="flex flex-col gap-3">
         {paths.map((path) => (
           <EntityCard
             key={path.id}

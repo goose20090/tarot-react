@@ -32,7 +32,7 @@ function AlchemyIndexPage() {
         subtitle="The Tria Prima and the cards that most explicitly carry their symbolism."
       />
 
-      <div className="grid gap-4 lg:grid-cols-2">
+      <div className="flex flex-col gap-3">
         {principles.map((principle) => (
           <EntityCard
             key={principle.id}
@@ -48,7 +48,7 @@ function AlchemyIndexPage() {
 
       <section className="space-y-4">
         <h2 className="display-font m-0 text-4xl text-[var(--text)]">The Alchemical Wedding</h2>
-        <div className="grid gap-3 grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
+        <div className="grid gap-5 grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
           {weddingCards.map((card) => (
             <CardThumb key={card.id} card={card} />
           ))}

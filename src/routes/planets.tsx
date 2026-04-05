@@ -31,7 +31,7 @@ function PlanetsIndexPage() {
         subtitle="Planetary correspondences across the deck."
       />
 
-      <div className="grid gap-4 lg:grid-cols-2">
+      <div className="flex flex-col gap-3">
         {planets.map((planet) => (
           <EntityCard
             key={planet.id}

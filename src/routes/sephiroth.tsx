@@ -31,7 +31,7 @@ function SephirothIndexPage() {
         subtitle="The ten spheres of the Tree of Life and the cards that rest within them."
       />
 
-      <div className="grid gap-4 lg:grid-cols-2">
+      <div className="flex flex-col gap-3">
         {sephiroth.map((node) => (
           <EntityCard
             key={node.id}

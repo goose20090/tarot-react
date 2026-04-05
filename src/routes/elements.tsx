@@ -31,7 +31,7 @@ function ElementsIndexPage() {
         subtitle="The four classical elements and their direct tarot correspondences."
       />
 
-      <div className="grid gap-4 lg:grid-cols-2">
+      <div className="flex flex-col gap-3">
         {elements.map((element) => (
           <EntityCard
             key={element.id}

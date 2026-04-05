@@ -31,7 +31,7 @@ function HebrewLettersIndexPage() {
         subtitle="The 22 letters linked to the 22 paths of the Tree of Life."
       />
 
-      <div className="grid gap-4 lg:grid-cols-2">
+      <div className="flex flex-col gap-3">
         {letters.map((letter) => (
           <EntityCard
             key={letter.id}

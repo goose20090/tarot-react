@@ -58,7 +58,7 @@ export default function Header({ currentUser }: HeaderProps) {
     pathname.startsWith('/alchemical-principles')
 
   return (
-    <header className="sticky top-0 z-50 border-b border-[var(--line)] bg-[rgba(13,11,26,0.94)] backdrop-blur-xl">
+    <header className="sticky top-0 z-50 border-b border-[var(--line)] bg-[var(--panel-strong)] backdrop-blur-xl">
       <div className="app-shell flex items-center justify-between py-3">
         <Link
           to="/cards"

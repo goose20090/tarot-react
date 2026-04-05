@@ -1,7 +1,6 @@
 import { Link, createFileRoute, notFound } from '@tanstack/react-router'
 import { CardLightbox } from '#/components/CardLightbox'
 import { MetaTable } from '#/components/MetaTable'
-import { PageHeader } from '#/components/PageHeader'
 import { getCard } from '#/lib/tarot.functions'
 import { parsePositiveInt, titleize } from '#/lib/tarot'
 
@@ -206,28 +205,44 @@ function CardDetailPage() {
         ].filter(Boolean)
 
   return (
-    <div className="space-y-8">
-      <PageHeader backHref="/cards" backLabel="Cards" title={card.name} subtitle={card.typeLabel} />
+    <div className="space-y-7">
+      <Link
+        to="/cards"
+        className="inline-block text-[0.9rem] text-[var(--text-muted)] transition hover:text-[var(--accent)]"
+      >
+        ← Cards
+      </Link>
 
-      <div className="grid gap-10 lg:grid-cols-[260px_minmax(0,1fr)] lg:items-start">
-        <div className="shadow-[0_4px_32px_rgba(0,0,0,0.5)]">
+      <div className="grid gap-12 lg:grid-cols-[260px_minmax(0,1fr)] lg:items-start">
+        <div className="overflow-hidden rounded-xl border border-[var(--line)] shadow-[0_4px_32px_rgba(0,0,0,0.5)]">
           <CardLightbox imageUrl={card.imageUrl} cardName={card.name} />
         </div>
 
-        <div className="space-y-8">
+        <div>
+          <div className="mb-6">
+            <h1 className="display-font m-0 text-[2rem] leading-[1.2] text-[var(--accent-strong)]">
+              {card.name}
+            </h1>
+            <p className="m-0 mt-1.5 text-[0.8rem] uppercase tracking-[0.08em] text-[var(--text-muted)]">
+              {card.typeLabel}
+            </p>
+          </div>
+
           <MetaTable items={metaItems} />
 
           {card.alchemicalWedding ? (
-            <div className="rounded-2xl border border-[var(--line)] bg-[var(--panel-muted)] p-5">
-              <p className="kicker m-0">Alchemical Wedding</p>
-              <h2 className="display-font m-0 pt-2 text-3xl text-[var(--text)]">
-                {titleize(card.alchemicalWedding)}
-              </h2>
-              <p className="m-0 pt-3 text-sm leading-7 text-[var(--text-soft)]">
+            <div className="mt-8 rounded-2xl border border-[var(--accent)] border-l-4 bg-[var(--panel-strong)] px-6 py-5">
+              <p className="display-font m-0 mb-2.5 text-[0.85rem] uppercase tracking-[0.06em] text-[var(--accent-strong)]">
+                Alchemical Wedding — {titleize(card.alchemicalWedding)}
+              </p>
+              <p className="m-0 mb-3 text-[0.9rem] leading-[1.6] text-[var(--text-muted)]">
                 {card.alchemicalWedding === 'solve'
                   ? 'The opposites are presented here: Sulphur and Salt appear before the union is complete.'
                   : 'The union is complete here: Sulphur and Salt are reconciled into Philosophical Mercury.'}
               </p>
+              <Link to="/alchemical-principles" className="text-sm">
+                → Alchemical Principles
+              </Link>
             </div>
           ) : null}
         </div>

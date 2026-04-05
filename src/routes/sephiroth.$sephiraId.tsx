@@ -34,7 +34,7 @@ function SephiraDetailPage() {
       {cards.length > 0 ? (
         <section className="space-y-4">
           <h2 className="display-font m-0 text-4xl text-[var(--text)]">Cards in {sephira.name}</h2>
-          <div className="grid gap-3 grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
+          <div className="grid gap-5 grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
             {cards.map((card) => (
               <CardThumb key={card.id} card={card} />
             ))}
@@ -45,7 +45,7 @@ function SephiraDetailPage() {
       {paths.length > 0 ? (
         <section className="space-y-4">
           <h2 className="display-font m-0 text-4xl text-[var(--text)]">Connected Paths</h2>
-          <div className="grid gap-4 lg:grid-cols-2">
+          <div className="flex flex-col gap-3">
             {paths.map((path) => (
               <EntityCard
                 key={path.id}

@@ -76,7 +76,7 @@ function CardsPage() {
     <div className="space-y-6">
       <PageHeader title="Cards" />
 
-      <section className="surface-panel rounded-xj p-4">
+      <section className="surface-panel rounded-2xl p-4">
         <Tabs.Root
           value={activeTab}
           onValueChange={(value) =>
@@ -86,7 +86,7 @@ function CardsPage() {
             })
           }
         >
-          <Tabs.List className="flex flex-wrap gap-2">
+          <Tabs.List className="flex flex-wrap gap-1">
             {[
               ["all", "All"],
               ["major", "✨ Atu"],
@@ -98,7 +98,7 @@ function CardsPage() {
               <Tabs.Trigger
                 key={value}
                 value={value}
-                className="focus-ring rounded-xl border border-[var(--line)] px-4 py-2 text-sm text-[var(--text-soft)] transition data-[state=active]:border-[var(--line-strong)] data-[state=active]:bg-[var(--panel-muted)] data-[state=active]:text-[var(--text)]"
+                className="focus-ring rounded-md border border-transparent px-3 py-1.5 text-sm text-[var(--text-muted)] transition hover:text-[var(--text-soft)] data-[state=active]:border-[var(--line)] data-[state=active]:bg-[var(--panel-strong)] data-[state=active]:text-[var(--accent)]"
               >
                 {label}
               </Tabs.Trigger>
@@ -107,7 +107,7 @@ function CardsPage() {
         </Tabs.Root>
       </section>
 
-      <div className="grid gap-2 grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 xl:grid-cols-7">
+      <div className="grid gap-5 grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6">
         {filteredCards.map((card) => (
           <CardThumb key={card.id} card={card} />
         ))}
