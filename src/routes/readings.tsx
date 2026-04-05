@@ -3,37 +3,36 @@ import {
   Outlet,
   createFileRoute,
   useRouterState,
-} from '@tanstack/react-router'
-import { CardThumb } from '#/components/CardThumb'
-import { PageHeader } from '#/components/PageHeader'
-import { getReadings } from '#/lib/tarot.functions'
+} from "@tanstack/react-router";
+import { CardThumb } from "#/components/CardThumb";
+import { PageHeader } from "#/components/PageHeader";
+import { getReadings } from "#/lib/tarot.functions";
 
-export const Route = createFileRoute('/readings')({
+export const Route = createFileRoute("/readings")({
   loader: () => getReadings(),
   component: ReadingsRouteComponent,
-})
+});
 
 function ReadingsRouteComponent() {
   const isIndex = useRouterState({
-    select: (state) => state.location.pathname === '/readings',
-  })
+    select: (state) => state.location.pathname === "/readings",
+  });
 
   if (!isIndex) {
-    return <Outlet />
+    return <Outlet />;
   }
 
-  return <ReadingsPage />
+  return <ReadingsPage />;
 }
 
 function ReadingsPage() {
-  const { readings } = Route.useLoaderData()
+  const { readings } = Route.useLoaderData();
 
   return (
     <div className="space-y-8">
       <PageHeader
-        eyebrow="Saved Work"
         title="Readings"
-        subtitle="Review your previously created spreads, revisit significators, and continue expanding the interactive side of the app."
+        subtitle="Where you can review and create your readings."
         actions={
           <Link
             to="/readings/new"
@@ -46,7 +45,9 @@ function ReadingsPage() {
 
       {readings.length === 0 ? (
         <section className="surface-panel-strong rounded-[2rem] p-8 text-center">
-          <h2 className="display-font m-0 text-4xl text-[var(--text)]">No readings yet</h2>
+          <h2 className="display-font m-0 text-4xl text-[var(--text)]">
+            No readings yet
+          </h2>
           <p className="mx-auto mb-0 max-w-xl pt-3 text-sm leading-7 text-[var(--text-soft)]">
             Start with a single card, a three-card pull, or jump straight into a
             Celtic Cross.
@@ -68,15 +69,18 @@ function ReadingsPage() {
                     {reading.name || reading.spread.name}
                   </h2>
                   <p className="m-0 pt-3 text-sm text-[var(--text-soft)]">
-                    Created {new Date(reading.createdAt).toLocaleDateString('en-GB')}
+                    Created{" "}
+                    {new Date(reading.createdAt).toLocaleDateString("en-GB")}
                   </p>
                 </div>
-                {reading.significatorCard ? <CardThumb card={reading.significatorCard} /> : null}
+                {reading.significatorCard ? (
+                  <CardThumb card={reading.significatorCard} />
+                ) : null}
               </div>
             </Link>
           ))}
         </div>
       )}
     </div>
-  )
+  );
 }

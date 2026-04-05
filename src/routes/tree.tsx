@@ -1,14 +1,14 @@
-import { createFileRoute } from '@tanstack/react-router'
-import { useState } from 'react'
-import { CardThumb } from '#/components/CardThumb'
-import { PageHeader } from '#/components/PageHeader'
-import { getTree } from '#/lib/tarot.functions'
-import { cn } from '#/utils/cn'
+import { createFileRoute } from "@tanstack/react-router";
+import { useState } from "react";
+import { CardThumb } from "#/components/CardThumb";
+import { PageHeader } from "#/components/PageHeader";
+import { getTree } from "#/lib/tarot.functions";
+import { cn } from "#/utils/cn";
 
-export const Route = createFileRoute('/tree')({
+export const Route = createFileRoute("/tree")({
   loader: () => getTree(),
   component: TreePage,
-})
+});
 
 const sephiraPositions: Record<number, [number, number]> = {
   1: [170, 50],
@@ -21,28 +21,24 @@ const sephiraPositions: Record<number, [number, number]> = {
   8: [90, 390],
   9: [170, 450],
   10: [170, 510],
-}
+};
 
 function TreePage() {
-  const { sephiroth, paths } = Route.useLoaderData()
-  const [activePanel, setActivePanel] = useState<string | null>(null)
+  const { sephiroth, paths } = Route.useLoaderData();
+  const [activePanel, setActivePanel] = useState<string | null>(null);
 
-  const selectedSephira =
-    activePanel?.startsWith('sephira-')
-      ? sephiroth.find((node) => node.id === Number(activePanel.replace('sephira-', '')))
-      : null
-  const selectedPath =
-    activePanel?.startsWith('path-')
-      ? paths.find((path) => path.id === Number(activePanel.replace('path-', '')))
-      : null
+  const selectedSephira = activePanel?.startsWith("sephira-")
+    ? sephiroth.find(
+        (node) => node.id === Number(activePanel.replace("sephira-", "")),
+      )
+    : null;
+  const selectedPath = activePanel?.startsWith("path-")
+    ? paths.find((path) => path.id === Number(activePanel.replace("path-", "")))
+    : null;
 
   return (
     <div className="space-y-8">
-      <PageHeader
-        eyebrow="Interactive Diagram"
-        title="Tree of Life"
-        subtitle="Explore the ten Sephiroth and twenty-two paths in a client-side panel view that is much easier to animate and extend than the original server-rendered version."
-      />
+      <PageHeader title="Tree of Life" />
 
       <div className="grid gap-6 xl:grid-cols-[minmax(0,0.95fr)_380px]">
         <section className="surface-panel-strong rounded-[2rem] p-4 md:p-6">
@@ -53,9 +49,9 @@ function TreePage() {
             aria-label="Interactive Tree of Life"
           >
             {paths.map((path) => {
-              const [sx, sy] = sephiraPositions[path.startSephira!.number]
-              const [ex, ey] = sephiraPositions[path.endSephira!.number]
-              const isActive = activePanel === `path-${path.id}`
+              const [sx, sy] = sephiraPositions[path.startSephira!.number];
+              const [ex, ey] = sephiraPositions[path.endSephira!.number];
+              const isActive = activePanel === `path-${path.id}`;
 
               return (
                 <g
@@ -66,9 +62,9 @@ function TreePage() {
                     setActivePanel(isActive ? null : `path-${path.id}`)
                   }
                   onKeyDown={(event) => {
-                    if (event.key === 'Enter' || event.key === ' ') {
-                      event.preventDefault()
-                      setActivePanel(isActive ? null : `path-${path.id}`)
+                    if (event.key === "Enter" || event.key === " ") {
+                      event.preventDefault();
+                      setActivePanel(isActive ? null : `path-${path.id}`);
                     }
                   }}
                   className="cursor-pointer"
@@ -86,16 +82,20 @@ function TreePage() {
                     y1={sy}
                     x2={ex}
                     y2={ey}
-                    stroke={isActive ? 'var(--accent-strong)' : 'rgba(242,234,220,0.34)'}
-                    strokeWidth={isActive ? '3' : '2'}
+                    stroke={
+                      isActive
+                        ? "var(--accent-strong)"
+                        : "rgba(242,234,220,0.34)"
+                    }
+                    strokeWidth={isActive ? "3" : "2"}
                   />
                 </g>
-              )
+              );
             })}
 
             {sephiroth.map((node) => {
-              const [x, y] = sephiraPositions[node.number]
-              const isActive = activePanel === `sephira-${node.id}`
+              const [x, y] = sephiraPositions[node.number];
+              const isActive = activePanel === `sephira-${node.id}`;
 
               return (
                 <g
@@ -106,9 +106,9 @@ function TreePage() {
                     setActivePanel(isActive ? null : `sephira-${node.id}`)
                   }
                   onKeyDown={(event) => {
-                    if (event.key === 'Enter' || event.key === ' ') {
-                      event.preventDefault()
-                      setActivePanel(isActive ? null : `sephira-${node.id}`)
+                    if (event.key === "Enter" || event.key === " ") {
+                      event.preventDefault();
+                      setActivePanel(isActive ? null : `sephira-${node.id}`);
                     }
                   }}
                   className="cursor-pointer"
@@ -117,8 +117,16 @@ function TreePage() {
                     cx={x}
                     cy={y}
                     r="27"
-                    fill={isActive ? 'rgba(212,169,90,0.22)' : 'rgba(242,234,220,0.06)'}
-                    stroke={isActive ? 'var(--accent-strong)' : 'rgba(242,234,220,0.34)'}
+                    fill={
+                      isActive
+                        ? "rgba(212,169,90,0.22)"
+                        : "rgba(242,234,220,0.06)"
+                    }
+                    stroke={
+                      isActive
+                        ? "var(--accent-strong)"
+                        : "rgba(242,234,220,0.34)"
+                    }
                   />
                   <text
                     x={x}
@@ -139,7 +147,7 @@ function TreePage() {
                     {node.name}
                   </text>
                 </g>
-              )
+              );
             })}
           </svg>
         </section>
@@ -168,9 +176,17 @@ function TreePage() {
                 </p>
               </div>
 
-              <div className={cn(selectedSephira.cards.length ? 'grid gap-4' : 'text-sm text-[var(--text-soft)]')}>
+              <div
+                className={cn(
+                  selectedSephira.cards.length
+                    ? "grid gap-4"
+                    : "text-sm text-[var(--text-soft)]",
+                )}
+              >
                 {selectedSephira.cards.length > 0 ? (
-                  selectedSephira.cards.map((card) => <CardThumb key={card.id} card={card} />)
+                  selectedSephira.cards.map((card) => (
+                    <CardThumb key={card.id} card={card} />
+                  ))
                 ) : (
                   <p>No cards assigned.</p>
                 )}
@@ -183,21 +199,25 @@ function TreePage() {
               <div>
                 <p className="kicker m-0">Path {selectedPath.number}</p>
                 <h2 className="display-font m-0 pt-2 text-4xl text-[var(--text)]">
-                  {selectedPath.startSephira?.name} → {selectedPath.endSephira?.name}
+                  {selectedPath.startSephira?.name} →{" "}
+                  {selectedPath.endSephira?.name}
                 </h2>
                 {selectedPath.hebrewLetter ? (
                   <p className="m-0 pt-2 text-sm text-[var(--text-soft)]">
-                    {selectedPath.hebrewLetter.letter} {selectedPath.hebrewLetter.name} ·{' '}
+                    {selectedPath.hebrewLetter.letter}{" "}
+                    {selectedPath.hebrewLetter.name} ·{" "}
                     {selectedPath.hebrewLetter.meaning}
                   </p>
                 ) : null}
               </div>
 
-              {selectedPath.card ? <CardThumb card={selectedPath.card} /> : null}
+              {selectedPath.card ? (
+                <CardThumb card={selectedPath.card} />
+              ) : null}
             </div>
           ) : null}
         </aside>
       </div>
     </div>
-  )
+  );
 }

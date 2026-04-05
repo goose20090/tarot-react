@@ -5,16 +5,29 @@ type CardThumbProps = {
     id: number
     name: string
     thumbUrl: string | null
+    imageUrl: string | null
     badge: string
   }
   caption?: React.ReactNode
 }
 
 export function CardThumb({ card, caption }: CardThumbProps) {
+  function prefetchImage() {
+    if (!card.imageUrl) return
+    if (document.querySelector(`link[rel="preload"][href="${card.imageUrl}"]`)) return
+    const link = document.createElement('link')
+    link.rel = 'preload'
+    link.as = 'image'
+    link.href = card.imageUrl
+    document.head.appendChild(link)
+  }
+
   return (
     <Link
       to="/cards/$cardId"
       params={{ cardId: String(card.id) }}
+      preload="intent"
+      onMouseEnter={prefetchImage}
       className="focus-ring surface-panel-strong block rounded-2xl p-2 transition hover:-translate-y-1 hover:border-[var(--accent)] hover:shadow-[0_8px_24px_rgba(201,168,76,0.2)]"
     >
       <div className="overflow-hidden rounded-xl border border-[var(--line)] bg-[var(--panel-muted)]">

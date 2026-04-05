@@ -54,20 +54,22 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-a {
-  color: var(--accent-strong);
-  text-decoration: none;
-}
+@layer base {
+  a {
+    color: var(--accent-strong);
+    text-decoration: none;
+  }
 
-a:hover {
-  color: var(--accent);
-}
+  a:hover {
+    color: var(--accent);
+  }
 
-button,
-input,
-textarea,
-select {
-  font: inherit;
+  button,
+  input,
+  textarea,
+  select {
+    font: inherit;
+  }
 }
 
 ::selection {
